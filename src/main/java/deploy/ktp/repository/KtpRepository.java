@@ -10,5 +10,3 @@ public interface KtpRepository extends JpaRepository<Ktp, Integer> {
     Optional<Ktp> findByNomorKtp(String nomorKtp);
 }
 
-public class KtpRepository {
-}
