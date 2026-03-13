@@ -1,44 +1,53 @@
 package deploy.ktp.controller;
 
-import deploy.ktp.model.entity.Ktp;
+import deploy.ktp.model.dto.KtpRequest;
+import deploy.ktp.model.dto.KtpResponse;
 import deploy.ktp.service.KtpService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Hashtable;
 import java.util.List;
 
 @RestController
 @RequestMapping("/ktp")
 @CrossOrigin(origins = "*")
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class KtpController {
 
     @Autowired
     private KtpService ktpService;
 
+
     @PostMapping
-    public ResponseEntity<?> addKtp(@RequestBody Ktp ktp) {
-        return ResponseEntity.ok(ktpService.addKtp(ktp));
+    public ResponseEntity<KtpResponse> addKtp(@RequestBody KtpRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ktpService.addKtp(request));
     }
 
     @GetMapping
-    public List<Ktp> getAllKtp() {
-        return ktpService.getAllktp();
+    public ResponseEntity<List<KtpResponse>> getAllKtp() {
+        return ResponseEntity.ok(ktpService.getAllktp());
     }
 
     @GetMapping("/{id}")
-    public Ktp getKtpById(@PathVariable Integer id) {
-        return ktpService.getKtpById(id);
+    public ResponseEntity<KtpResponse> getKtpById(@PathVariable Integer id) {
+        return ResponseEntity.ok(ktpService.getKtpById(id));
     }
 
     @PutMapping("/{id}")
-    public Ktp updateKtp(@PathVariable Integer id, @RequestBody Ktp ktp) {
-        return ktpService.updateKtp(id, ktp);
+    public ResponseEntity<KtpResponse> updateKtp(@PathVariable Integer id, @RequestBody KtpRequest request) {
+        return ResponseEntity.ok(ktpService.updateKtp(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public String deleteKtp(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteKtp(@PathVariable Integer id) {
         ktpService.deleteKtp(id);
-        return "KTP dengan id " + id + " berhasil dihapus.";
+        return ResponseEntity.ok("KTP dengan id " + id + " berhasil dihapus!");
     }
 }
