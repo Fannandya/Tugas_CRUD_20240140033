@@ -18,7 +18,7 @@ public class KtpController {
 
     @PostMapping
     public ResponseEntity<?> addKtp(@RequestBody Ktp ktp) {
-        return ResponseEntity.ok(ktpService.addKtp(ktp))
+        return ResponseEntity.ok(ktpService.addKtp(ktp));
     }
 
     @GetMapping

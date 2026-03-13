@@ -6,15 +6,15 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "ktp")
-@getter
+@Getter
 @Setter
-@builder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Ktp {
     @Id
-    @generatedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, nullable = false)
@@ -24,4 +24,7 @@ public class Ktp {
     private String alamat;
     private LocalDate tanggalLahir;
     private String jenisKelamin;
+
+
+
 }

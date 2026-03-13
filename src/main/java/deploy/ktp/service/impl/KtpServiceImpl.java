@@ -15,9 +15,10 @@ public class KtpServiceImpl implements KtpService {
 
     @Override
     public Ktp addKtp(Ktp ktp) {
-        if (ktpRepository.findByNomorKtp(ktp.getNomorKtp()).isPresent()){
+        if (ktpRepository.findByNomorKtp(ktp.getNomorKtp()).isPresent()) {
             throw new RuntimeException("nomor KTP sudah terdaftar!");
         }
+
         return ktpRepository.save(ktp);
     }
 
